@@ -1,6 +1,5 @@
 package com.example.administrator.weibo.http;
 
-import com.example.administrator.recyclerviewtest.exception.RequestException;
 
 /**
  * Created by ZZB on 2016/3/26.
