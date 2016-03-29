@@ -3,12 +3,12 @@ package com.example.administrator.weibo.http;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.administrator.recyclerviewtest.exception.RequestException;
-import com.example.administrator.recyclerviewtest.http.HttpRequest.Method;
 import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Request.Builder;
+import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
@@ -28,7 +28,20 @@ public abstract class BaseHttpClient {
     }
     protected abstract HttpSerializer getHttpSerializer();
     private void post(HttpRequest request, HttpCallback callback){
-        //TODO
+        if(request == null){
+            return;
+        }
+        FormEncodingBuilder formEncodingBuilder = new FormEncodingBuilder();
+        Map<String, Object> params = request.getParams();
+        if(params != null){
+            for(String key : params.keySet()){
+                formEncodingBuilder.add(key, params.get(key).toString());
+            }
+        }
+        RequestBody formBody = formEncodingBuilder.build();
+        Request okRequest = new Request.Builder()
+                .url(request.getUrl()).post(formBody).build();
+        getClient().newCall(okRequest).enqueue(getCallback(callback));
     }
     private void get(HttpRequest request, final HttpCallback callback){
         if(request == null){
@@ -51,25 +64,7 @@ public abstract class BaseHttpClient {
         }
         okBuilder.url(url.toString());
         Request okRequest = okBuilder.build();
-        getClient().newCall(okRequest).enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                //TODO
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                int statusCode = response.code();
-                try {
-                    byte[] responseBody = response.body().bytes();
-                    final Object result = getHttpSerializer().toObject(callback.clazz, statusCode, responseBody);
-                    onSuccess(callback, result);
-                } catch (RequestException e) {
-                    e.printStackTrace();
-                    onError(callback, e);
-                }
-            }
-        });
+        getClient().newCall(okRequest).enqueue(getCallback(callback));
     }
 
     private void onError(final HttpCallback callback, final RequestException e) {
@@ -97,10 +92,33 @@ public abstract class BaseHttpClient {
     }
 
     public void request(HttpRequest request, HttpCallback callback){
-        if(request.getMethod() == Method.GET){
+        if(request.getMethod() == HttpRequest.Method.GET){
             get(request, callback);
-        }else if(request.getMethod() == Method.POST){
+        }else if(request.getMethod() == HttpRequest.Method.POST){
             post(request, callback);
         }
     }
+
+    private Callback getCallback(final HttpCallback callback){
+        return new Callback(){
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                int statusCode = response.code();
+                try {
+                    byte[] responseBody = response.body().bytes();
+                    final Object result = getHttpSerializer().toObject(callback.clazz, statusCode, responseBody);
+                    onSuccess(callback, result);
+                } catch (RequestException e) {
+                    e.printStackTrace();
+                    onError(callback, e);
+                }
+            }
+        };
+    }
+
 }
