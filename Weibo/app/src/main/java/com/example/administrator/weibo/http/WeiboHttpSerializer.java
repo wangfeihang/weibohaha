@@ -1,6 +1,6 @@
 package com.example.administrator.weibo.http;
 
-import com.example.administrator.weibo.JsonHelper;
+import com.example.administrator.weibo.utils.JsonHelper;
 
 import java.lang.reflect.Type;
 
@@ -22,4 +22,21 @@ public class WeiboHttpSerializer implements HttpSerializer {
             throw new RequestException(e, statusCode, "json 解析异常");
         }
     }
+  /*
+    @Override
+    public List<Object> toObjectList(Object clazz, int statusCode, byte[] body) throws RequestException {
+        try {
+            String json = new String(body, "UTF-8");
+            if (clazz instanceof Class) {
+                return JsonHelper.toObjectList(json, (Class) clazz);
+            } else {
+                return JsonHelper.jsonToObjectList(json, (Type) clazz);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RequestException(e, statusCode, "json 解析异常");
+        }
+    }
+   */
+
 }

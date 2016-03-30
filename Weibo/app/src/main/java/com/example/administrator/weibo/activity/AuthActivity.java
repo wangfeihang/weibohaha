@@ -1,5 +1,6 @@
 package com.example.administrator.weibo.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -10,6 +11,7 @@ import com.example.administrator.weibo.common.AppConstants.WeiboConfig;
 import com.example.administrator.weibo.entity.AccessToken;
 import com.example.administrator.weibo.model.LoginModel;
 import com.example.administrator.weibo.model.callback.LoginCallback.GetAccessTokenCallback;
+import com.example.administrator.weibo.utils.SharedPreferencesUtils;
 import com.example.administrator.weibo.utils.UrlUtils;
 
 import java.util.Map;
@@ -53,6 +55,11 @@ public class AuthActivity extends BaseActivity implements GetAccessTokenCallback
 
     @Override
     public void onGetTokenSuccess(AccessToken token) {
+        SharedPreferencesUtils sharedPreferencesUtils=new SharedPreferencesUtils(AuthActivity.this);
+        sharedPreferencesUtils.saveToken(token);
+        Intent mintent = new Intent();
+        mintent.setClass(AuthActivity.this , StatusListActivity.class );
+        startActivity(mintent);
         Toast.makeText(this, "onGetTokenSuccess:" + token.toString(), Toast.LENGTH_LONG).show();
     }
 

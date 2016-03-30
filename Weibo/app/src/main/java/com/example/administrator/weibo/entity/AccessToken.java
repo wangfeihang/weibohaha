@@ -26,6 +26,29 @@ public class AccessToken {
         return leftMillis > 0;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public long getExpiresIn() {
+        return expiresIn;
+    }
+
+    public long getExpiresTime() {
+        return expiresTime;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setExpiresIn(long expiresIn) {
+        this.expiresIn = expiresIn;
+    }
+
+    public void setExpiresTime(long expiresTime) {
+        this.expiresTime = expiresTime;
+    }
 
     @Override
     public String toString() {

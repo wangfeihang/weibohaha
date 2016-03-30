@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.administrator.weibo.utils.JsonHelper;
+import com.example.administrator.weibo.utils.SharedPreferencesUtils;
 import com.squareup.okhttp.RequestBody;
 
 import java.util.ArrayList;
@@ -61,7 +63,7 @@ public class AccessAuthorizationActivity  extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar item_statuslist clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();

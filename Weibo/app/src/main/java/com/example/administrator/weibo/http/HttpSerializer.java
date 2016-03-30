@@ -7,4 +7,5 @@ package com.example.administrator.weibo.http;
 public interface HttpSerializer {
 
     Object toObject(Object clazz, int statusCode, byte[] body) throws RequestException;
+  //  List<Object> toObjectList(Object clazz, int statusCode, byte[] body) throws RequestException;
 }

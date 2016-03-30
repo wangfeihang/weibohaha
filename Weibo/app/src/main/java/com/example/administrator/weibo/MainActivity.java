@@ -13,6 +13,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.administrator.weibo.utils.JsonHelper;
+import com.example.administrator.weibo.utils.SharedPreferencesUtils;
 import com.squareup.okhttp.RequestBody;
 
 public class MainActivity extends AppCompatActivity {
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar item_statuslist clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
