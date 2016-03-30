@@ -2,6 +2,7 @@ package com.example.administrator.weibo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,10 +117,11 @@ public class StatusListAdpater extends RecyclerView.Adapter<StatusListAdpater.Vi
     private void initData(List<Status> statusList,int position)
     {
         tvUserName.setText(statusList.get(position).getUser().getScreenName());
-        tvSource.setText(statusList.get(position).getSource());
+        tvSource.setText(Html.fromHtml(statusList.get(position).getSource(), null,null));
+
         tvText.setText(statusList.get(position).getText());
-        tvRepostsCount.setText(String.format("%d",statusList.get(position).getRepostsCount()));
-        tvCommentsCount.setText(String.format("%d", statusList.get(position).getCommentsCount()));
+//        tvRepostsCount.setText(String.format("%d",statusList.get(position).getRepostsCount()));
+//        tvCommentsCount.setText(String.format("%d", statusList.get(position).getCommentsCount()));
         tvAttitudesCount.setText(String.format("%d", statusList.get(position).getAttitudesCount()));
     }
     public void setData(List<Status> statusList)

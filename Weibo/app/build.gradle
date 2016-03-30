@@ -27,4 +27,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.google.code.gson:gson:1.7.2'
     compile "com.yy:notification-center-android:1.0.3"
+
 }

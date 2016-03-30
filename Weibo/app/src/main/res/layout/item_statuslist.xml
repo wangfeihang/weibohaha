@@ -6,6 +6,7 @@
     <include android:id="@+id/statuslist_head"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         layout="@layout/item_statuslist_top" />
 
     <TextView
@@ -25,6 +26,7 @@
         android:layout_below="@+id/tv_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+
         layout="@layout/item_statuslist_bottom" />
 
 </RelativeLayout>

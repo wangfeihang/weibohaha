@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
     android:textSize="5dp"
     android:orientation="horizontal">
     <RelativeLayout
@@ -13,7 +14,7 @@
             android:layout_centerHorizontal="true"
             android:layout_height="30dp"
             android:layout_width="30dp"
-            android:background="@drawable/star"/>
+            android:background="@drawable/repost"/>
         <TextView
             android:id="@+id/tv_reposts_count"
             android:layout_height="wrap_content"
@@ -21,7 +22,7 @@
             android:textSize="18dp"
             android:layout_toRightOf="@+id/im_reposts"
             android:layout_marginTop="6dp"
-            android:text="10"/>
+            android:text="转发"/>
     </RelativeLayout>>
     <RelativeLayout
         android:layout_weight="1"
@@ -32,7 +33,7 @@
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/star"/>
+            android:background="@drawable/comment"/>
         <TextView
             android:id="@+id/tv_comments_count"
             android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
             android:textSize="18dp"
             android:layout_toRightOf="@+id/im_comments"
             android:layout_marginTop="6dp"
-            android:text="10"/>
+            android:text="评论"/>
     </RelativeLayout>>
     <RelativeLayout
         android:layout_weight="1"
@@ -51,7 +52,7 @@
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/star"/>
+            android:background="@drawable/attitude"/>
         <TextView
             android:id="@+id/tv_attitudes_count"
             android:layout_height="wrap_content"
