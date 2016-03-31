@@ -12,14 +12,13 @@ import android.widget.TextView;
 
 import com.example.administrator.weibo.R;
 import com.example.administrator.weibo.entity.Status;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class StatusListAdpater extends RecyclerView.Adapter<StatusListAdpater.ViewHolder> {
+public class StatusListAdpater extends RecyclerView.Adapter<ViewHolder> {
 
     private List<Status> statusList;
     private Context mcontext;
@@ -35,6 +34,7 @@ public class StatusListAdpater extends RecyclerView.Adapter<StatusListAdpater.Vi
     private TextView tvAttitudesCount;
     private OnItemClickListener onClickListener;
     private OnItemLongClickListener onLongClickListener;
+
     public interface OnItemClickListener {
         void onClick(View v);
     }
@@ -52,7 +52,7 @@ public class StatusListAdpater extends RecyclerView.Adapter<StatusListAdpater.Vi
 
 
     @Override
-    public StatusListAdpater.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_statuslist, parent, false);
@@ -68,39 +68,12 @@ public class StatusListAdpater extends RecyclerView.Adapter<StatusListAdpater.Vi
         initData(statusList,position);
     }
 
+
     @Override
     public int getItemCount() {
         return statusList.size();
     }
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public View v;
-        public ViewHolder(View itemLayoutView,
-                          final OnItemClickListener onClickListener,
-                          final OnItemLongClickListener onLongClickListener) {
-            super(itemLayoutView);
-            v=itemLayoutView;
-            itemLayoutView.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    if (onClickListener != null) {
-                        onClickListener.onClick(v);
-                    }
-                }
-            });
-            itemLayoutView.setOnLongClickListener(new View.OnLongClickListener() {
-
-                @Override
-                public boolean onLongClick(View v) {
-                    if (onLongClickListener != null) {
-                        onLongClickListener.onLongClick(v);
-                    }
-                    return true;
-                }
-            });
-        }
-    }
 
     private void initViews(View v) {
         imAvatar=(ImageButton)v.findViewById(R.id.im_avatar);

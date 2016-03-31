@@ -1,7 +1,10 @@
 package com.example.administrator.weibo.model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.example.administrator.weibo.activity.StatusListActivity;
 import com.example.administrator.weibo.common.AppConstants.WeiboConfig;
 import com.example.administrator.weibo.entity.AccessToken;
 import com.example.administrator.weibo.http.HttpCallback;
@@ -37,5 +40,12 @@ public class LoginModel {
                 NotificationCenter.INSTANCE.getObserver(LoginCallback.GetAccessTokenCallback.class).onGetTokenFailed(errorMsg);
             }
         });
+    }
+    public void gotoStatusListActivity(Context mContext)
+    {
+        Intent mintent = new Intent();
+        mintent.setClass(mContext , StatusListActivity.class );
+        mContext.startActivity(mintent);
+
     }
 }
