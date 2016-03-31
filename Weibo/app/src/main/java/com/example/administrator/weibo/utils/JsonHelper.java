@@ -20,8 +20,7 @@ public class JsonHelper {
         }
         return sGson;
     }
-    public static <T>T toObject(String jsonString,Class<T> mclass)
-    {
+    public static <T>T toObject(String jsonString,Class<T> mclass) {
         Gson gson=new Gson();
         return gson.fromJson(jsonString, mclass);
     }
@@ -34,8 +33,7 @@ public class JsonHelper {
         }
         return t;
     }
-    public static <T>List<T> toObjectList(String jsonString,Class<T> mclass)
-    {
+    public static <T>List<T> toObjectList(String jsonString,Class<T> mclass) {
         Gson gson=new Gson();
         return gson.fromJson(jsonString,
                 new TypeToken<List<T>>() {

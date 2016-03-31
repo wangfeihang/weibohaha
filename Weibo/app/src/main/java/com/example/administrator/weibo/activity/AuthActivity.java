@@ -31,8 +31,7 @@ public class AuthActivity extends BaseActivity implements GetAccessTokenCallback
             mLoginModel.gotoStatusListActivity(AuthActivity.this);
             finish();
         }
-        else
-        {
+        else {
             initViews();//初始化View，做一些findViewById的操作
             loadData();
         }

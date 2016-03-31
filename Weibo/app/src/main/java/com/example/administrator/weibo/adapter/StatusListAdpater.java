@@ -42,8 +42,7 @@ public class StatusListAdpater extends RecyclerView.Adapter<ViewHolder> {
         void onLongClick(View v);
     }
     public StatusListAdpater(Context mcontext, OnItemClickListener onClickListener,
-                             OnItemLongClickListener onLongClickListener)
-    {
+                             OnItemLongClickListener onLongClickListener) {
         this.statusList=new ArrayList<Status>();
         this.mcontext = mcontext;
         this.onClickListener = onClickListener;
@@ -87,8 +86,7 @@ public class StatusListAdpater extends RecyclerView.Adapter<ViewHolder> {
         imAttitudes=(ImageButton)v.findViewById(R.id.im_attitudes);
         tvAttitudesCount=(TextView)v.findViewById(R.id.tv_attitudes_count);
     }
-    private void initData(List<Status> statusList,int position)
-    {
+    private void initData(List<Status> statusList,int position) {
         tvUserName.setText(statusList.get(position).getUser().getScreenName());
         tvSource.setText(Html.fromHtml(statusList.get(position).getSource(), null,null));
 
@@ -97,8 +95,7 @@ public class StatusListAdpater extends RecyclerView.Adapter<ViewHolder> {
 //        tvCommentsCount.setText(String.format("%d", statusList.get(position).getCommentsCount()));
         tvAttitudesCount.setText(String.format("%d", statusList.get(position).getAttitudesCount()));
     }
-    public void setData(List<Status> statusList)
-    {
+    public void setData(List<Status> statusList) {
         Log.d("statusList.size",String.format("%d",statusList.size()));
         this.statusList=statusList;
     }

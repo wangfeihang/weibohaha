@@ -41,8 +41,7 @@ public class LoginModel {
             }
         });
     }
-    public void gotoStatusListActivity(Context mContext)
-    {
+    public void gotoStatusListActivity(Context mContext) {
         Intent mintent = new Intent();
         mintent.setClass(mContext , StatusListActivity.class );
         mContext.startActivity(mintent);
