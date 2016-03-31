@@ -21,14 +21,14 @@ import java.util.Map;
 public class AuthActivity extends BaseActivity implements GetAccessTokenCallback{
     private WebView mWebView;
     private LoginModel mLoginModel = new LoginModel();
-    private SharedPreferencesUtils sharedPreferencesUtils;
+    private SharedPreferencesUtils mSharedPreferencesUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-        sharedPreferencesUtils=new SharedPreferencesUtils(AuthActivity.this);
-        if(sharedPreferencesUtils.getToken().isValid()) {
-            mLoginModel.gotoStatusListActivity(AuthActivity.this);
+        mSharedPreferencesUtils=new SharedPreferencesUtils(AuthActivity.this);
+        if(mSharedPreferencesUtils.getToken().isValid()) {
+            StatusListActivity.launch(AuthActivity.this);
             finish();
         }
         else {
@@ -64,8 +64,8 @@ public class AuthActivity extends BaseActivity implements GetAccessTokenCallback
     @Override
     public void onGetTokenSuccess(AccessToken token) {
 
-        sharedPreferencesUtils.saveToken(token);
-        mLoginModel.gotoStatusListActivity(AuthActivity.this);
+        mSharedPreferencesUtils.saveToken(token);
+        StatusListActivity.launch(AuthActivity.this);
         finish();
         Toast.makeText(this, "onGetTokenSuccess:" + token.toString(), Toast.LENGTH_LONG).show();
     }

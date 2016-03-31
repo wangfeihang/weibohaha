@@ -1,5 +1,7 @@
 package com.example.administrator.weibo.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -74,5 +76,10 @@ public class StatusListActivity  extends BaseActivity implements GetStatusListCa
     private void getStatusList(String token)
     {
         mStatusListModel.getStatusList(token);
+    }
+    public static void launch(Context context) {
+        Intent intent = new Intent();
+        intent.setClass(context , StatusListActivity.class );
+        context.startActivity(intent);
     }
 }
