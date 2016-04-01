@@ -1,8 +1,6 @@
 package com.example.administrator.weibo.adapter;
 
 import android.content.Context;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.administrator.weibo.R;
-import com.example.administrator.weibo.entity.Status;
+import com.example.administrator.weibo.entity.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ import java.util.List;
  */
 public class CommentsListAdpater extends MyBaseAdapter {
 
-    private List<Status> mStatusList;
+    private List<Comment> mCommentsList;
     private Context mContext;
     private ImageButton imAvatar;
     private TextView tvUserName;
@@ -32,7 +30,7 @@ public class CommentsListAdpater extends MyBaseAdapter {
 
     public CommentsListAdpater(Context context, OnItemClickListener onClickListener,
                                OnItemLongClickListener onLongClickListener) {
-        this.mStatusList=new ArrayList<Status>();
+        this.mCommentsList=new ArrayList<Comment>();
         this.mContext = context;
         this.mOnClickListener = onClickListener;
         this.mOnLongClickListener = onLongClickListener;
@@ -52,14 +50,14 @@ public class CommentsListAdpater extends MyBaseAdapter {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         View v=holder.v;
- //       initViews(v);
- //       initData(mStatusList,position);
+        initViews(v);
+        initData(mCommentsList, position);
     }
 
 
     @Override
     public int getItemCount() {
-        return 16;
+        return mCommentsList.size();
     }
 
 
@@ -71,17 +69,13 @@ public class CommentsListAdpater extends MyBaseAdapter {
         imLike=(ImageButton)v.findViewById(R.id.im_like);
         tvLikeCount=(TextView)v.findViewById(R.id.tv_likecount);
     }
-    private void initData(List<Status> statusList,int position) {
+    private void initData(List<Comment> statusList,int position) {
         tvUserName.setText(statusList.get(position).getUser().getScreenName());
-        tvDate.setText(Html.fromHtml(statusList.get(position).getSource(), null,null));
-
+        tvDate.setText(statusList.get(position).getDate());
         tvText.setText(statusList.get(position).getText());
-//        tvRepostsCount.setText(String.format("%d",statusList.get(position).getRepostsCount()));
-//        tvCommentsCount.setText(String.format("%d", statusList.get(position).getCommentsCount()));
-        tvLikeCount.setText(String.format("%d", statusList.get(position).getAttitudesCount()));
     }
-    public void setData(List<Status> statusList) {
-        Log.d("statusList.size",String.format("%d",statusList.size()));
-        this.mStatusList=statusList;
+    public void setData(List<Comment> commentsList) {
+     //   Log.d("statusList.size",String.format("%d",statusList.size()));
+        this.mCommentsList=commentsList;
     }
 }
