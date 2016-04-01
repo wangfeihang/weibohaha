@@ -2,10 +2,13 @@ package com.example.administrator.weibo.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class Status {
+public class Status implements Serializable {
+    private static final long serialVersionUID = -6919461967497580385L;
     private String text;
     private String source;
     private User user;
@@ -75,4 +78,36 @@ public class Status {
     public void setAttitudesCount(int attitudesCount) {
         this.attitudesCount = attitudesCount;
     }
+/*
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(text);
+        dest.writeString(source);
+        dest.writeValue(user);
+        dest.writeInt(repostsCount);
+        dest.writeInt(commentsCount);
+        dest.writeInt(attitudesCount);
+    }
+    public static final Parcelable.Creator<Status> CREATOR = new Creator<Status>() {
+
+        @Override
+        public Status createFromParcel(Parcel source) {
+            Status police = new Status();
+            police.id = source.re();
+            police.workTime = source.readInt();
+            return police;
+        }
+
+        @Override
+        public Status[] newArray(int size) {
+            return new Status[size];
+        }
+    };
+    */
 }

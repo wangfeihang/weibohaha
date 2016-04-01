@@ -14,17 +14,21 @@ import com.example.administrator.weibo.R;
 import com.example.administrator.weibo.adapter.ItemDivider;
 import com.example.administrator.weibo.adapter.MyBaseAdapter;
 import com.example.administrator.weibo.adapter.StatusListAdpater;
+import com.example.administrator.weibo.entity.Status;
 import com.example.administrator.weibo.entity.StatusList;
 import com.example.administrator.weibo.model.StatusListModel;
 import com.example.administrator.weibo.model.callback.StatusListCallback.GetStatusListCallback;
 import com.example.administrator.weibo.utils.SharedPreferencesUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/30.
  */
 public class StatusListActivity  extends BaseActivity implements GetStatusListCallback {
 
-
+    private List<Status> mStatusList;
     private StatusListAdpater mAdapter;
     private RecyclerView mRecyclerView;
     private LayoutManager mLayoutManager;
@@ -41,7 +45,9 @@ public class StatusListActivity  extends BaseActivity implements GetStatusListCa
 
     @Override
     public void onGetStatusListSuccess(StatusList statusList) {
-        mAdapter.setData(statusList.getStatuses());
+        mStatusList=new ArrayList<Status>();
+        mStatusList=statusList.getStatuses();
+        mAdapter.setData(mStatusList);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -62,6 +68,7 @@ public class StatusListActivity  extends BaseActivity implements GetStatusListCa
             @Override
             public void onClick(View v) {
                 TextView info = (TextView) v.findViewById(R.id.tv_username);
+                mStatusListModel.onClick(v,mStatusList,StatusListActivity.this);
                 Toast.makeText(getApplicationContext(), "单击" + info.getText(), Toast.LENGTH_LONG).show();
             }
         },new MyBaseAdapter.OnItemLongClickListener() {
@@ -80,7 +87,7 @@ public class StatusListActivity  extends BaseActivity implements GetStatusListCa
     }
     public static void launch(Context context) {
         Intent intent = new Intent();
-        intent.setClass(context , StatusListActivity.class );
+        intent.setClass(context, StatusListActivity.class);
         context.startActivity(intent);
     }
 }

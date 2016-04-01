@@ -57,6 +57,7 @@ public class StatusListAdpater extends MyBaseAdapter {
         View v=holder.v;
        initViews(v);
        initData(mStatusList, position);
+       v.setTag(position);
     }
 
 

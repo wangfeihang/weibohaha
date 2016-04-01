@@ -1,14 +1,20 @@
 package com.example.administrator.weibo.model;
 
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
+import com.example.administrator.weibo.activity.StatusContentActivity;
 import com.example.administrator.weibo.common.AppConstants;
+import com.example.administrator.weibo.entity.Status;
 import com.example.administrator.weibo.entity.StatusList;
 import com.example.administrator.weibo.http.HttpCallback;
 import com.example.administrator.weibo.http.HttpRequest;
 import com.example.administrator.weibo.http.WeiboHttpClient;
 import com.example.administrator.weibo.model.callback.StatusListCallback;
 import com.yy.androidlib.util.notification.NotificationCenter;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/30.
@@ -33,6 +39,13 @@ public class StatusListModel {
                 NotificationCenter.INSTANCE.getObserver(StatusListCallback.GetStatusListCallback.class).onGetStatusListFailed(errorMsg);
             }
         });
+    }
+    public void onClick(View v, List<Status> mStatusList,Context context)
+    {
+        int position=(int)v.getTag();
+        Status status=mStatusList.get(position);
+        StatusContentActivity.launch(context, status);
+
     }
 
 }

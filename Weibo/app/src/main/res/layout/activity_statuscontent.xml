@@ -8,12 +8,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <include android:id="@+id/status_content"
+        <include android:id="@+id/status_content_head"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            layout="@layout/item_statuslist" />
+            layout="@layout/item_statuslist_top" />
+        <TextView
+            android:id="@+id/status_content_text"
+            android:layout_below="@+id/status_content_head"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="内容"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:id="@+id/top"
