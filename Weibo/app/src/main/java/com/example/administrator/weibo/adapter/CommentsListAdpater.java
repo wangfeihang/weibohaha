@@ -18,23 +18,20 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class StatusListAdpater extends MyBaseAdapter {
+public class CommentsListAdpater extends MyBaseAdapter {
 
     private List<Status> mStatusList;
     private Context mContext;
     private ImageButton imAvatar;
     private TextView tvUserName;
-    private TextView tvSource;
+    private TextView tvDate;
     private TextView tvText;
-    private ImageButton imReposts;
-    private TextView tvRepostsCount;
-    private ImageButton imComments;
-    private TextView tvCommentsCount;
-    private ImageButton imAttitudes;
-    private TextView tvAttitudesCount;
+    private ImageButton imLike;
+    private TextView tvLikeCount;
 
-    public StatusListAdpater(Context context, OnItemClickListener onClickListener,
-                             OnItemLongClickListener onLongClickListener) {
+
+    public CommentsListAdpater(Context context, OnItemClickListener onClickListener,
+                               OnItemLongClickListener onLongClickListener) {
         this.mStatusList=new ArrayList<Status>();
         this.mContext = context;
         this.mOnClickListener = onClickListener;
@@ -46,7 +43,7 @@ public class StatusListAdpater extends MyBaseAdapter {
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_statuslist, parent, false);
+                .inflate(R.layout.item_commentslist, parent, false);
         MyViewHolder vh = new MyViewHolder(v, mOnClickListener,
                 mOnLongClickListener);
         return vh;
@@ -55,37 +52,33 @@ public class StatusListAdpater extends MyBaseAdapter {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         View v=holder.v;
-       initViews(v);
-       initData(mStatusList, position);
+ //       initViews(v);
+ //       initData(mStatusList,position);
     }
 
 
     @Override
     public int getItemCount() {
-        return mStatusList.size();
+        return 16;
     }
 
 
     private void initViews(View v) {
         imAvatar=(ImageButton)v.findViewById(R.id.im_avatar);
         tvUserName=(TextView)v.findViewById(R.id.tv_username);
-        tvSource=(TextView)v.findViewById(R.id.tv_source);
+        tvDate=(TextView)v.findViewById(R.id.tv_date);
         tvText=(TextView)v.findViewById(R.id.tv_text);
-        imReposts=(ImageButton)v.findViewById(R.id.im_reposts);
-        tvRepostsCount=(TextView)v.findViewById(R.id.tv_reposts_count);
-        imComments=(ImageButton)v.findViewById(R.id.im_comments);
-        tvCommentsCount=(TextView)v.findViewById(R.id.tv_comments_count);
-        imAttitudes=(ImageButton)v.findViewById(R.id.im_attitudes);
-        tvAttitudesCount=(TextView)v.findViewById(R.id.tv_attitudes_count);
+        imLike=(ImageButton)v.findViewById(R.id.im_like);
+        tvLikeCount=(TextView)v.findViewById(R.id.tv_likecount);
     }
     private void initData(List<Status> statusList,int position) {
         tvUserName.setText(statusList.get(position).getUser().getScreenName());
-        tvSource.setText(Html.fromHtml(statusList.get(position).getSource(), null,null));
+        tvDate.setText(Html.fromHtml(statusList.get(position).getSource(), null,null));
 
         tvText.setText(statusList.get(position).getText());
 //        tvRepostsCount.setText(String.format("%d",statusList.get(position).getRepostsCount()));
 //        tvCommentsCount.setText(String.format("%d", statusList.get(position).getCommentsCount()));
-        tvAttitudesCount.setText(String.format("%d", statusList.get(position).getAttitudesCount()));
+        tvLikeCount.setText(String.format("%d", statusList.get(position).getAttitudesCount()));
     }
     public void setData(List<Status> statusList) {
         Log.d("statusList.size",String.format("%d",statusList.size()));

@@ -9,6 +9,9 @@ public class Status {
     private String text;
     private String source;
     private User user;
+    private Long id;
+
+
 
     @SerializedName("reposts_count")
     private int repostsCount;
@@ -39,6 +42,14 @@ public class Status {
 
     public int getAttitudesCount() {
         return attitudesCount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setText(String text) {

@@ -21,11 +21,29 @@
         android:layout_alignTop="@+id/im_avatar"
         android:layout_marginLeft="10dp"/>
     <TextView
-        android:id="@+id/tv_source"
+        android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="来源："
+        android:text="日期："
         android:textSize="18dp"
         android:layout_below="@+id/tv_username"
         android:layout_alignLeft="@+id/tv_username"/>
+    <ImageButton
+        android:id="@+id/im_like"
+        android:background="@drawable/attitude"
+        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:layout_toLeftOf="@+id/tv_likecount"
+        android:layout_alignTop="@+id/tv_likecount"
+        />
+    <TextView
+        android:id="@+id/tv_likecount"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="10"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        />
 </RelativeLayout>

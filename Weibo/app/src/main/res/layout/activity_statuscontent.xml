@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.administrator.weibo.View.MyHoveringScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_hover"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include android:id="@+id/status_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            layout="@layout/item_statuslist" />
+
+        <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/top"
+            >
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:background="#AAff0000"
+                android:orientation="horizontal">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:text="这是固定部分"
+                    />
+                <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="点我一下"
+                    android:id="@+id/btn"
+                    />
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_commentslist"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</com.example.administrator.weibo.View.MyHoveringScrollView>
+

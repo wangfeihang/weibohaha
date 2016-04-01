@@ -6,12 +6,12 @@ import android.view.View;
 /**
  * Created by Administrator on 2016/3/31.
  */
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class MyViewHolder extends RecyclerView.ViewHolder {
     // each data item is just a string in this case
     public View v;
-    public ViewHolder(View itemLayoutView,
-                      final StatusListAdpater.OnItemClickListener onClickListener,
-                      final StatusListAdpater.OnItemLongClickListener onLongClickListener) {
+    public MyViewHolder(View itemLayoutView,
+                        final MyBaseAdapter.OnItemClickListener onClickListener,
+                        final MyBaseAdapter.OnItemLongClickListener onLongClickListener) {
         super(itemLayoutView);
         v=itemLayoutView;
         itemLayoutView.setOnClickListener(new View.OnClickListener() {
