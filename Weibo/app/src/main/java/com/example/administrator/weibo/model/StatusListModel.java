@@ -30,7 +30,7 @@ public class StatusListModel {
         mHttpClient.request(request, new HttpCallback<StatusList>(StatusList.class) {
             @Override
             public void onResponseSuccess(StatusList result) {
-                Log.d("test", String.format("%d",result.getStatuses().size()));
+                Log.d("test1", String.format("%d",result.getStatuses().size()));
                 NotificationCenter.INSTANCE.getObserver(StatusListCallback.GetStatusListCallback.class).onGetStatusListSuccess(result);
             }
 

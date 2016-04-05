@@ -57,6 +57,7 @@ public class StatusContentActivity extends BaseActivity implements CommentsListC
         tvSource=(TextView)findViewById(R.id.tv_source);
         tvText=(TextView)findViewById(R.id.status_content_text);
         tvCommentsCount=(TextView)findViewById(R.id.tv_comments_count);
+        tvUserName.setText(mStatus.getUser().getScreenName());
         tvSource.setText(Html.fromHtml(mStatus.getSource(), null, null));
         tvText.setText(mStatus.getText());
         tvCommentsCount.setText("评论"+mStatus.getCommentsCount());

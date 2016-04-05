@@ -28,7 +28,7 @@ public class AuthActivity extends BaseActivity implements GetAccessTokenCallback
         setContentView(R.layout.activity_auth);
         mSharedPreferencesUtils=new SharedPreferencesUtils(AuthActivity.this);
         if(mSharedPreferencesUtils.getToken().isValid()) {
-            StatusListActivity.launch(AuthActivity.this);
+            MainActivity.launch(AuthActivity.this);
             finish();
         }
         else {
@@ -65,7 +65,7 @@ public class AuthActivity extends BaseActivity implements GetAccessTokenCallback
     public void onGetTokenSuccess(AccessToken token) {
 
         mSharedPreferencesUtils.saveToken(token);
-        StatusListActivity.launch(AuthActivity.this);
+        MainActivity.launch(AuthActivity.this);
         finish();
         Toast.makeText(this, "onGetTokenSuccess:" + token.toString(), Toast.LENGTH_LONG).show();
     }
