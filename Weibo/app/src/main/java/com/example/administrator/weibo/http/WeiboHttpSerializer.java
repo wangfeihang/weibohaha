@@ -3,6 +3,7 @@ package com.example.administrator.weibo.http;
 import com.example.administrator.weibo.utils.JsonHelper;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * Created by ZZB on 2016/3/29.
@@ -22,7 +23,7 @@ public class WeiboHttpSerializer implements HttpSerializer {
             throw new RequestException(e, statusCode, "json 解析异常");
         }
     }
-  /*
+
     @Override
     public List<Object> toObjectList(Object clazz, int statusCode, byte[] body) throws RequestException {
         try {
@@ -37,6 +38,6 @@ public class WeiboHttpSerializer implements HttpSerializer {
             throw new RequestException(e, statusCode, "json 解析异常");
         }
     }
-   */
+
 
 }

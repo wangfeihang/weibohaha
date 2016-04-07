@@ -75,7 +75,7 @@ public class MainActivity extends FragmentActivity{
         mPageVp = (ViewPager) this.findViewById(R.id.id_page_vp);
 
         mFragment1=new StatusListFragment(this);
-        mFragment2=new MessageFragment();
+        mFragment2=new MessageFragment(this);
         mFragment3=new FindFragment();
         mFragment4=new AccountFragment();
 
@@ -117,29 +117,29 @@ public class MainActivity extends FragmentActivity{
         tvMessage.setTextColor(Color.BLACK);
         tvFind.setTextColor(Color.BLACK);
         tvAccount.setTextColor(Color.BLACK);
-        imHome.setBackgroundResource(R.drawable.home);
-        imMessage.setBackgroundResource(R.drawable.message);
-        imFind.setBackgroundResource(R.drawable.find);
-        imAccount.setBackgroundResource(R.drawable.account);
+        imHome.setBackgroundResource(R.drawable.tabbar_home);
+        imMessage.setBackgroundResource(R.drawable.tabbar_message_center);
+        imFind.setBackgroundResource(R.drawable.tabbar_discover);
+        imAccount.setBackgroundResource(R.drawable.tabbar_profile);
     }
     private void setPressed(int i)
     {
         switch (i) {
             case 0:
                 tvHome.setTextColor(getResources().getColor(R.color.colorOrange));
-                imHome.setBackgroundResource(R.drawable.home_pressed);
+                imHome.setBackgroundResource(R.drawable.tabbar_home_highlighted);
                 break;
             case 1:
                 tvMessage.setTextColor(getResources().getColor(R.color.colorOrange));
-                imMessage.setBackgroundResource(R.drawable.message_pressed);
+                imMessage.setBackgroundResource(R.drawable.tabbar_message_center_highlighted);
                 break;
             case 2:
                 tvFind.setTextColor(getResources().getColor(R.color.colorOrange));
-                imFind.setBackgroundResource(R.drawable.find_pressed);
+                imFind.setBackgroundResource(R.drawable.tabbar_discover_highlighted);
                 break;
             case 3:
                 tvAccount.setTextColor(getResources().getColor(R.color.colorOrange));
-                imAccount.setBackgroundResource(R.drawable.account_pressed);
+                imAccount.setBackgroundResource(R.drawable.tabbar_profile_highlighted);
                 break;
 
         }

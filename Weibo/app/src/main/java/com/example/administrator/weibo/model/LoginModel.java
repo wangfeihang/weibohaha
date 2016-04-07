@@ -12,6 +12,8 @@ import com.example.administrator.weibo.http.WeiboHttpClient;
 import com.example.administrator.weibo.model.callback.LoginCallback;
 import com.yy.androidlib.util.notification.NotificationCenter;
 
+import java.util.List;
+
 /**
  * Created by ZZB on 2016/3/29.
  */
@@ -25,13 +27,15 @@ public class LoginModel {
                 addParams("client_id", WeiboConfig.APP_KEY).addParams("client_secret", WeiboConfig.APP_SECRET).
                 addParams("grant_type", "authorization_code").addParams("code", code).addParams("redirect_uri", WeiboConfig.REDIRECT_URL);
         HttpRequest request = builder.build();
-        mHttpClient.request(request, new HttpCallback<AccessToken>(AccessToken.class) {
+        mHttpClient.request(false,request, new HttpCallback<AccessToken>(AccessToken.class) {
             @Override
             public void onResponseSuccess(AccessToken result) {
                 Log.d("test", result.toString());
                 NotificationCenter.INSTANCE.getObserver(LoginCallback.GetAccessTokenCallback.class).onGetTokenSuccess(result);
             }
-
+            @Override
+            public void onResponseListSuccess(List<AccessToken> resultList) {
+            }
             @Override
             public void onResponseFailed(int errorCode, String errorMsg) {
                 NotificationCenter.INSTANCE.getObserver(LoginCallback.GetAccessTokenCallback.class).onGetTokenFailed(errorMsg);

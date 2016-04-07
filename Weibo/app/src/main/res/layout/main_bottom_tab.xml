@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/main_bottom_bar_home"/>
+            android:background="@drawable/tabbar_home"/>
         <TextView
             android:id="@+id/tv_home"
             android:focusable="false"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/main_bottom_bar_message"/>
+            android:background="@drawable/tabbar_message_center"/>
         <TextView
             android:id="@+id/tv_message"
             android:focusable="false"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/main_bottom_bar_find"/>
+            android:background="@drawable/tabbar_discover"/>
         <TextView
             android:id="@+id/tv_find"
             android:focusable="false"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/main_bottom_bar_account"/>
+            android:background="@drawable/tabbar_profile"/>
         <TextView
             android:id="@+id/tv_account"
             android:focusable="false"

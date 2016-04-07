@@ -65,20 +65,26 @@ public class MyHoveringScrollView extends FrameLayout{
 
 
     public void setTopView(final int id) {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                mTopView = (ViewGroup) mContentView.findViewById(id);
+        if(id!=0) {
 
-                int height = mTopView.getChildAt(0).getMeasuredHeight();
-                ViewGroup.LayoutParams params = mTopView.getLayoutParams();
-                params.height = height;
-                mTopView.setLayoutParams(params);
-                mTopViewTop = mTopView.getTop();
-                mTopContent = mTopView.getChildAt(0);
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    mTopView = (ViewGroup) mContentView.findViewById(id);
 
-            }
-        });
+                    int height = mTopView.getChildAt(0).getMeasuredHeight();
+                    ViewGroup.LayoutParams params = mTopView.getLayoutParams();
+                    params.height = height;
+                    mTopView.setLayoutParams(params);
+                    mTopViewTop = mTopView.getTop();
+                    mTopContent = mTopView.getChildAt(0);
+
+                }
+            });
+        }
+        else
+            mTopView=null;
+
     }
 
     public void onScroll(final int scrollY) {

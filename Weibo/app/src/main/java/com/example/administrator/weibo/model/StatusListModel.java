@@ -27,13 +27,15 @@ public class StatusListModel {
         builder.url(AppConstants.WeiboConfig.END_POINT + "/2/statuses/friends_timeline.json").method(HttpRequest.Method.GET).
                 addParams("access_token", token).addParams("count",15);
         HttpRequest request = builder.build();
-        mHttpClient.request(request, new HttpCallback<StatusList>(StatusList.class) {
+        mHttpClient.request(false,request, new HttpCallback<StatusList>(StatusList.class) {
             @Override
             public void onResponseSuccess(StatusList result) {
                 Log.d("test1", String.format("%d",result.getStatuses().size()));
                 NotificationCenter.INSTANCE.getObserver(StatusListCallback.GetStatusListCallback.class).onGetStatusListSuccess(result);
             }
-
+            @Override
+            public void onResponseListSuccess(List<StatusList> resultList) {
+            }
             @Override
             public void onResponseFailed(int errorCode, String errorMsg) {
                 NotificationCenter.INSTANCE.getObserver(StatusListCallback.GetStatusListCallback.class).onGetStatusListFailed(errorMsg);

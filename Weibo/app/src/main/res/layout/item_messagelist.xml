@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:textSize="5dp">
+
+    <ImageButton
+        android:id="@+id/im_avatar"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/userpicture"
+        />
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户名"
+        android:textSize="25dp"
+        android:layout_toRightOf="@+id/im_avatar"
+        android:layout_alignTop="@+id/im_avatar"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="消息："
+        android:textSize="18dp"
+        android:layout_below="@+id/tv_username"
+        android:layout_alignLeft="@+id/tv_username"/>
+    <TextView
+        android:id="@+id/tv_card"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="wode"
+        android:textSize="25dp"
+        android:layout_toRightOf="@+id/im_avatar"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"/>
+    <ImageButton
+        android:id="@+id/im_message_card_arrow"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@drawable/messages_card_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"/>
+</RelativeLayout>

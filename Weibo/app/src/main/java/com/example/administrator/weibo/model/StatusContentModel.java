@@ -15,6 +15,8 @@ import com.example.administrator.weibo.model.callback.CommentsListCallback;
 import com.example.administrator.weibo.utils.SharedPreferencesUtils;
 import com.yy.androidlib.util.notification.NotificationCenter;
 
+import java.util.List;
+
 /**
  * Created by ZZB on 2016/3/29.
  */
@@ -31,7 +33,7 @@ public class StatusContentModel {
         Log.d("test", String.valueOf(sharedPreferencesUtils.getToken()));
         HttpRequest request = builder.build();
         Log.d("test", String.valueOf(status.getId()));
-        mHttpClient.request(request, new HttpCallback<CommentsList>(CommentsList.class) {
+        mHttpClient.request(false,request, new HttpCallback<CommentsList>(CommentsList.class) {
 
             @Override
             public void onResponseSuccess(CommentsList result) {
@@ -39,7 +41,9 @@ public class StatusContentModel {
                 Log.d("test", String.valueOf(result.getmCommentList().size()));
                 NotificationCenter.INSTANCE.getObserver(CommentsListCallback.GetCommentsListCallback.class).onGetCommentsListSuccess(result);
             }
-
+            @Override
+            public void onResponseListSuccess(List<CommentsList> resultList) {
+            }
             @Override
             public void onResponseFailed(int errorCode, String errorMsg) {
                 Log.d("test","失败");
