@@ -14,5 +14,6 @@ public class AppConstants {
         public static final String APP_SECRET = IS_WFH ? "03d740890a2c75b2962150df927358e5" : "74e7a4590efcaf4b4dde5f2caa70ea86";
         public static final String REDIRECT_URL = "https://www.baidu.com/";
         public static final String STATUS_BUNDLE_KEY="serializablestatus";
+        public static final String USER_BUNDLE_KEY="serializableuser";
     }
 }

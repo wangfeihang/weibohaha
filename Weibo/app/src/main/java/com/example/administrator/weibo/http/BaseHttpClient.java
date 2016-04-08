@@ -2,7 +2,6 @@ package com.example.administrator.weibo.http;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -13,7 +12,6 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -92,17 +90,6 @@ public abstract class BaseHttpClient {
             }
         });
     }
-    private void onSuccessList(final HttpCallback callback, final List resultList) {
-        if(callback == null){
-            return;
-        }
-        mMainHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                callback.onResponseListSuccess(resultList);
-            }
-        });
-    }
     public void request(boolean isList,HttpRequest request, HttpCallback callback){
         if(request.getMethod() == HttpRequest.Method.GET){
             get(request, callback,isList);
@@ -123,16 +110,8 @@ public abstract class BaseHttpClient {
                 int statusCode = response.code();
                 try {
                     byte[] responseBody = response.body().bytes();
-                    if(isList){
-                        Log.d("test4","responseBody:"+1);
-                        final List<Object> resultList=getHttpSerializer().toObjectList(callback.clazz, statusCode, responseBody);
-
-                        onSuccessList(callback,resultList);
-                    }
-                    else {
-                        final Object result = getHttpSerializer().toObject(callback.clazz, statusCode, responseBody);
-                        onSuccess(callback, result);
-                    }
+                    final Object result = getHttpSerializer().toObject(callback.clazz, statusCode, responseBody);
+                    onSuccess(callback, result);
 
                 } catch (RequestException e) {
                     e.printStackTrace();

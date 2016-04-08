@@ -1,5 +1,6 @@
 package com.example.administrator.weibo.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.weibo.R;
+import com.example.administrator.weibo.activity.ShowUserActivity;
+import com.example.administrator.weibo.activity.StatusContentActivity;
 import com.example.administrator.weibo.adapter.ItemDivider;
 import com.example.administrator.weibo.adapter.MyBaseAdapter;
 import com.example.administrator.weibo.adapter.StatusListAdpater;
@@ -26,6 +29,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/4/5.
  */
+@SuppressLint("ValidFragment")
 public class StatusListFragment extends BaseFragment  implements GetStatusListCallback {
     private Context mContext;
     private List<Status> mStatusList;
@@ -63,8 +67,8 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
             @Override
             public void onClick(View v) {
                 TextView info = (TextView) v.findViewById(R.id.tv_username);
-                mStatusListModel.onClick(v,mStatusList,mContext);
-             //   Toast.makeText(getApplicationContext(), "单击" + info.getText(), Toast.LENGTH_LONG).show();
+                onClickUser(v, mStatusList, mContext);
+                //   Toast.makeText(getApplicationContext(), "单击" + info.getText(), Toast.LENGTH_LONG).show();
             }
         },new MyBaseAdapter.OnItemLongClickListener() {
             @Override
@@ -75,6 +79,18 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+    }
+    public void onClickStatus(View v, List<Status> mStatusList,Context context)
+    {
+        int position=(int)v.getTag();
+        Status status=mStatusList.get(position);
+        StatusContentActivity.launch(context, status);
+    }
+    public void onClickUser(View v, List<Status> mStatusList,Context context)
+    {
+        int position=(int)v.getTag();
+        Status status=mStatusList.get(position);
+        ShowUserActivity.launch(context, status.getUser());
     }
     private void getStatusList(String token) {
         mStatusListModel.getStatusList(token);

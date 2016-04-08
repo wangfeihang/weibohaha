@@ -12,8 +12,6 @@ import com.example.administrator.weibo.http.WeiboHttpClient;
 import com.example.administrator.weibo.model.callback.LoginCallback;
 import com.yy.androidlib.util.notification.NotificationCenter;
 
-import java.util.List;
-
 /**
  * Created by ZZB on 2016/3/29.
  */
@@ -32,9 +30,6 @@ public class LoginModel {
             public void onResponseSuccess(AccessToken result) {
                 Log.d("test", result.toString());
                 NotificationCenter.INSTANCE.getObserver(LoginCallback.GetAccessTokenCallback.class).onGetTokenSuccess(result);
-            }
-            @Override
-            public void onResponseListSuccess(List<AccessToken> resultList) {
             }
             @Override
             public void onResponseFailed(int errorCode, String errorMsg) {
