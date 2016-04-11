@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.weibo.R;
-import com.example.administrator.weibo.activity.ShowUserActivity;
 import com.example.administrator.weibo.activity.StatusContentActivity;
 import com.example.administrator.weibo.adapter.ItemDivider;
 import com.example.administrator.weibo.adapter.MyBaseAdapter;
@@ -47,7 +46,7 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
         super.onCreateView(inflater, container, savedInstanceState);
         View chatView = inflater.inflate(R.layout.fragment_statuslist,container,false);
         initViews(chatView);//初始化View，做一些findViewById的操作
-        getStatusList(mSharedPreferencesUtils.getToken().getToken());
+        getStatusList(mSharedPreferencesUtils.getToken().getToken(),15,"StatusListFragment");
         return chatView;
     }
     @Override
@@ -67,7 +66,7 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
             @Override
             public void onClick(View v) {
                 TextView info = (TextView) v.findViewById(R.id.tv_username);
-                onClickUser(v, mStatusList, mContext);
+                onClickStatus(v, mStatusList, mContext);
                 //   Toast.makeText(getApplicationContext(), "单击" + info.getText(), Toast.LENGTH_LONG).show();
             }
         },new MyBaseAdapter.OnItemLongClickListener() {
@@ -86,23 +85,21 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
         Status status=mStatusList.get(position);
         StatusContentActivity.launch(context, status);
     }
-    public void onClickUser(View v, List<Status> mStatusList,Context context)
-    {
-        int position=(int)v.getTag();
-        Status status=mStatusList.get(position);
-        ShowUserActivity.launch(context, status.getUser());
-    }
-    private void getStatusList(String token) {
-        mStatusListModel.getStatusList(token);
+
+    private void getStatusList(String token,int count,String caller) {
+        mStatusListModel.getStatusList(token,count,caller);
     }
 
     @Override
-    public void onGetStatusListSuccess(StatusList statusList) {
-        mStatusList=new ArrayList<Status>();
-        mStatusList=statusList.getStatuses();
-        mAdapter.setData(mStatusList);
-        mAdapter.notifyDataSetChanged();
-        Log.d("test","chang"+mStatusList.size());
+    public void onGetStatusListSuccess(StatusList statusList,String caller) {
+        if(caller.equals("StatusListFragment")){
+            mStatusList=new ArrayList<Status>();
+            mStatusList=statusList.getStatuses();
+            mAdapter.setData(mStatusList);
+            mAdapter.notifyDataSetChanged();
+            Log.d("test","chang"+mStatusList.size());
+        }
+
      //   Toast.makeText(mContext, "长按"+ , Toast.LENGTH_LONG).show();
     }
 

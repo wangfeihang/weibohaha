@@ -78,7 +78,7 @@ public class ShowUserActivity extends FragmentActivity {
 
 
 
-        mShowUserHomeFragment=new ShowUserHomeFragment();
+        mShowUserHomeFragment=new ShowUserHomeFragment(this);
         mShowUserStatusFragment=new StatusListFragment(this);
         mShowUserAlbumFragment=new ShowUserAlbumFragment();
 

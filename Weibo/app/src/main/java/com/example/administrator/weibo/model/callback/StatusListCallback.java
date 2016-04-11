@@ -9,7 +9,7 @@ public class StatusListCallback {
 
 
     public interface GetStatusListCallback{
-        void onGetStatusListSuccess(StatusList statusList);
+        void onGetStatusListSuccess(StatusList statusList,String caller);
         void onGetStatusListFailed(String errorMsg);
     }
 }

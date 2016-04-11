@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/lightgray">
     <!-- A RecyclerView with some commonly used attributes -->
-    <TextView
+    <include
+        android:id="@+id/basic_information"
+        android:layout_marginTop="10dp"
+        layout="@layout/show_user_home_basic_information"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
-
+        android:layout_width="match_parent"/>
+    <include
+        android:id="@+id/hot_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/basic_information"
+        layout="@layout/show_user_home_basic_details_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+    <!-- A RecyclerView with some commonly used attributes -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_statuslist"
+        android:background="@color/white"
         android:scrollbars="vertical"
+        android:layout_below="@+id/hot_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
+    <include
+        android:id="@+id/hot_topic"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/rv_statuslist"
+        layout="@layout/show_user_home_basic_details_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+    <TextView
+        android:id="@+id/tv_show_all_status"
+        android:layout_below="@+id/hot_topic"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:textColor="@color/gray"
+        android:text="查看他的全部微博"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

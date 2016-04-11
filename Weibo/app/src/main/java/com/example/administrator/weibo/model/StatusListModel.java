@@ -16,16 +16,16 @@ import com.yy.androidlib.util.notification.NotificationCenter;
 public class StatusListModel {
     private WeiboHttpClient mHttpClient = new WeiboHttpClient();
 
-    public void getStatusList(String token) {
+    public void getStatusList(String token,int count, final String caller) {
         HttpRequest.Builder builder = new HttpRequest.Builder();
         builder.url(AppConstants.WeiboConfig.END_POINT + "/2/statuses/friends_timeline.json").method(HttpRequest.Method.GET).
-                addParams("access_token", token).addParams("count",15);
+                addParams("access_token", token).addParams("count",count);
         HttpRequest request = builder.build();
         mHttpClient.request(false,request, new HttpCallback<StatusList>(StatusList.class) {
             @Override
             public void onResponseSuccess(StatusList result) {
                 Log.d("test1", String.format("%d",result.getStatuses().size()));
-                NotificationCenter.INSTANCE.getObserver(StatusListCallback.GetStatusListCallback.class).onGetStatusListSuccess(result);
+                NotificationCenter.INSTANCE.getObserver(StatusListCallback.GetStatusListCallback.class).onGetStatusListSuccess(result,caller);
             }
             @Override
             public void onResponseFailed(int errorCode, String errorMsg) {
