@@ -14,7 +14,7 @@
             android:layout_centerHorizontal="true"
             android:layout_height="30dp"
             android:layout_width="30dp"
-            android:background="@drawable/repost"/>
+            android:background="@drawable/toolbar_icon_retweet"/>
         <TextView
             android:id="@+id/tv_reposts_count"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/comment"/>
+            android:background="@drawable/toolbar_icon_comment"/>
         <TextView
             android:id="@+id/tv_comments_count"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             android:layout_height="30dp"
             android:layout_width="30dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/attitude"/>
+            android:background="@drawable/toolbar_icon_unlike"/>
         <TextView
             android:id="@+id/tv_attitudes_count"
             android:layout_height="wrap_content"

@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity{
         mFragmentList.add(mFragment3);
         mFragmentList.add(mFragment4);
 
-        mFragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(), mFragmentList);
+        mFragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(), mFragmentList,null);
         mPageVp.setAdapter(mFragmentAdapter);
         mPageVp.setCurrentItem(0);
         setPressed(0);

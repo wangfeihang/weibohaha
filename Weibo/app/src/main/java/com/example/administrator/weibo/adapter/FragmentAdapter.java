@@ -10,25 +10,29 @@ import java.util.List;
  * Created by Administrator on 2016/4/5.
  */
 public class FragmentAdapter extends FragmentPagerAdapter {
-    List<Fragment> fragmentList = new ArrayList<Fragment>();
+    List<Fragment> mFragmentList = new ArrayList<Fragment>();
+    List<String> mFragmentTitles=new ArrayList<String>();
 
 
 
-
-    public FragmentAdapter(FragmentManager supportFragmentManager, List<Fragment> mFragmentList) {
+    public FragmentAdapter(FragmentManager supportFragmentManager, List<Fragment> fragmentList,List<String> fragmentTitles) {
         super(supportFragmentManager);
-        this.fragmentList = mFragmentList;
+        this.mFragmentList = fragmentList;
+        this.mFragmentTitles=fragmentTitles;
     }
 
     @Override
     public Fragment getItem(int position) {
 
-        return fragmentList.get(position);
+        return mFragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return fragmentList.size();
+        return mFragmentList.size();
     }
-
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mFragmentTitles.get(position);
+    }
 }
