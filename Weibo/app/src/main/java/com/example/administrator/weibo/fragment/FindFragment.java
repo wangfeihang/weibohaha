@@ -15,7 +15,7 @@ public class FindFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View chatView = inflater.inflate(R.layout.fragment_3,container,false);
+        View chatView = inflater.inflate(R.layout.fragment_show_user_statuslist,container,false);
         return chatView;
     }
     @Override

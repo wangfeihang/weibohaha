@@ -21,7 +21,7 @@ import com.example.administrator.weibo.common.AppConstants;
 import com.example.administrator.weibo.entity.User;
 import com.example.administrator.weibo.fragment.ShowUserAlbumFragment;
 import com.example.administrator.weibo.fragment.ShowUserHomeFragment;
-import com.example.administrator.weibo.fragment.ShowUserStatusFragment;
+import com.example.administrator.weibo.fragment.StatusListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class ShowUserActivity extends FragmentActivity {
      * Fragment
      */
     private ShowUserHomeFragment  mShowUserHomeFragment;
-    private ShowUserStatusFragment mShowUserStatusFragment;
+    private StatusListFragment mShowUserStatusFragment;
     private ShowUserAlbumFragment mShowUserAlbumFragment;
     /**
      * ViewPager的当前选中页
@@ -82,7 +82,7 @@ public class ShowUserActivity extends FragmentActivity {
 
 
         mShowUserHomeFragment=new ShowUserHomeFragment();
-        mShowUserStatusFragment=new ShowUserStatusFragment();
+        mShowUserStatusFragment=new StatusListFragment(this);
         mShowUserAlbumFragment=new ShowUserAlbumFragment();
 
         mFragmentList.add(mShowUserHomeFragment);
@@ -150,10 +150,11 @@ public class ShowUserActivity extends FragmentActivity {
         context.startActivity(intent);
     }
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
-        int zero,one,two;
+        float zero,one,two;
         @Override
         public void onPageSelected(int arg0) {
 
+            float endPoint=0;
 
             int[] homePosition = new int[2];
 
@@ -167,6 +168,7 @@ public class ShowUserActivity extends FragmentActivity {
             one=tvStatus.getLeft()-tvHome.getLeft();
             two=tvAlbum.getLeft()-tvHome.getLeft();
 
+
             Animation animation = null;
             switch(arg0) {
                 case 0:
@@ -176,6 +178,7 @@ public class ShowUserActivity extends FragmentActivity {
                     } else if(currentIndex == 2) {
                         animation = new TranslateAnimation(two,zero , 0, 0);
                     }
+                    endPoint=tvHome.getX();
                     break;
                 case 1:
                     if(currentIndex == 0) {
@@ -183,6 +186,7 @@ public class ShowUserActivity extends FragmentActivity {
                     } else if(currentIndex == 2) {
                         animation = new TranslateAnimation(two,one , 0, 0);
                     }
+                    endPoint=tvStatus.getX();
                     break;
                 case 2:
                     if(currentIndex == 0) {
@@ -190,11 +194,13 @@ public class ShowUserActivity extends FragmentActivity {
                     } else if(currentIndex == 1) {
                         animation = new TranslateAnimation(one,two , 0, 0);
                     }
+                    endPoint=tvAlbum.getX();
                     break;
             }
             currentIndex = arg0;
             animation.setFillAfter(true);//True:图片停在动画结束位置
             animation.setDuration(300);
+            setAnimationsListener(animation,imCursor,endPoint);
             imCursor.startAnimation(animation);
         }
         @Override
@@ -203,5 +209,23 @@ public class ShowUserActivity extends FragmentActivity {
         @Override
         public void onPageScrollStateChanged(int arg0) {
         }
+    }
+    private void setAnimationsListener(Animation anim, final ImageView imCursor, final float endPoint) {
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // TODO Auto-generated method stub
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // TODO Auto-generated method stub
+                imCursor.clearAnimation();
+                imCursor.setX(endPoint);
+            }
+        });
     }
 }
