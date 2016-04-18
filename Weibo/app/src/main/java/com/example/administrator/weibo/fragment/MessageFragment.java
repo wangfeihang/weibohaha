@@ -24,31 +24,31 @@ import java.util.List;
 public class MessageFragment extends BaseFragment{
     private Context mContext;
     private List<Message> mMessageList;
-//    private MyHoveringScrollView mViewHover;
     private MessageListAdpater mAdapter;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private SharedPreferencesUtils mSharedPreferencesUtils;
     private SearchView mSearchView;
+
     public MessageFragment(Context context) {
         super();
         mContext=context;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View chatView = inflater.inflate(R.layout.fragment_message,container,false);
-        initViews(chatView);//初始化View，做一些findViewById的操作
-        return chatView;
+        View view = inflater.inflate(R.layout.fragment_message,container,false);
+        initViews(view);//初始化View，做一些findViewById的操作
+        return view;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
     }
 
     private void initViews(View view) {
- //       mViewHover = (MyHoveringScrollView)view.findViewById(R.id.view_hover);
- //       mViewHover.setTopView(0);
         mSharedPreferencesUtils=new SharedPreferencesUtils(mContext);
         mLayoutManager=new LinearLayoutManager(mContext);
         mSearchView=(SearchView)view.findViewById(R.id.sv_search);

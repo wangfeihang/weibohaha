@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/4/6.
  */
-public class MessageListAdpater  extends MyBaseAdapter {
+public class MessageListAdpater  extends MyBaseAdapter<Message> {
     private List<Message> mMessageList;
     private TextView tvUserName;
     private TextView tvMessage;
@@ -53,6 +53,11 @@ public class MessageListAdpater  extends MyBaseAdapter {
     @Override
     public int getItemCount() {
         return mMessageList.size()+3;
+    }
+
+    @Override
+    public void addData(List<Message> datalist) {
+        mMessageList.addAll(datalist);
     }
 
     private void initViews(View v,int position) {

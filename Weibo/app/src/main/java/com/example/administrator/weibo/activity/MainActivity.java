@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity{
     private FragmentAdapter mFragmentAdapter;
     private ViewPager mPageVp;
     /**
-     * Tab显示内容TextView
+     * Tab显示内容
      */
     private TextView tvHome,tvMessage,tvFind,tvAccount;
     private ImageView imHome,imMessage,imFind,imAccount;

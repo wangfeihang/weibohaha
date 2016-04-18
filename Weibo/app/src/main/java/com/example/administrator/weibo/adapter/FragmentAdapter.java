@@ -13,8 +13,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     List<Fragment> mFragmentList = new ArrayList<Fragment>();
     List<String> mFragmentTitles=new ArrayList<String>();
 
-
-
     public FragmentAdapter(FragmentManager supportFragmentManager, List<Fragment> fragmentList,List<String> fragmentTitles) {
         super(supportFragmentManager);
         this.mFragmentList = fragmentList;
@@ -23,7 +21,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-
         return mFragmentList.get(position);
     }
 
@@ -31,6 +28,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mFragmentList.size();
     }
+
     @Override
     public CharSequence getPageTitle(int position) {
         return mFragmentTitles.get(position);

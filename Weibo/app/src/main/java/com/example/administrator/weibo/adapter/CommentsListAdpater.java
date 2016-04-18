@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class CommentsListAdpater extends MyBaseAdapter {
+public class CommentsListAdpater extends MyBaseAdapter<Comment> {
 
     private List<Comment> mCommentsList;
     private Context mContext;
@@ -54,10 +54,14 @@ public class CommentsListAdpater extends MyBaseAdapter {
         initData(mCommentsList, position);
     }
 
-
     @Override
     public int getItemCount() {
         return mCommentsList.size();
+    }
+
+    @Override
+    public void addData(List<Comment> datalist) {
+        mCommentsList.addAll(datalist);
     }
 
 

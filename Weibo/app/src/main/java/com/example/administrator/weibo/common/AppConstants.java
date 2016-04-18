@@ -15,5 +15,6 @@ public class AppConstants {
         public static final String REDIRECT_URL = "https://www.baidu.com/";
         public static final String STATUS_BUNDLE_KEY="serializablestatus";
         public static final String USER_BUNDLE_KEY="serializableuser";
+        public static final int MAX_ITEMS_PER_PAGE=7;
     }
 }

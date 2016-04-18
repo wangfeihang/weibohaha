@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.weibo.R;
@@ -30,12 +29,8 @@ public class ShowUserActivity extends FragmentActivity {
     private List<String> mFragmentTitles = new ArrayList<String>();
     private FragmentAdapter mFragmentAdapter;
     private WrapContentHeightViewPager mPageVp;
-    /**
-     * Tab显示内容TextView
-     */
+
     private TextView tvUserName,tvAttentionFansCount,tvUsersDescription;
-    private TextView tvHome,tvStatus,tvAlbum;
-    private ImageView imCursor;
     /**
      * Fragment
      */
@@ -46,7 +41,9 @@ public class ShowUserActivity extends FragmentActivity {
      * ViewPager的当前选中页
      */
     private int currentIndex;
-
+    /**
+     * 悬浮View
+     */
     private MyHoveringScrollView mViewHover;
 
     private  User mUser;
@@ -70,13 +67,7 @@ public class ShowUserActivity extends FragmentActivity {
         tvAttentionFansCount.setText("关注： "+mUser.getFriendsCount()+" | 粉丝 "+mUser.getFollowersCount());
         tvUsersDescription.setText(mUser.getDescription());
 
-        tvHome = (TextView) this.findViewById(R.id.tv_home);
-        tvStatus = (TextView) this.findViewById(R.id.tv_status);
-        tvAlbum=(TextView) this.findViewById(R.id.tv_photo_album);
-        imCursor = (ImageView) this.findViewById(R.id.iv_cursor);
         mPageVp = (WrapContentHeightViewPager) this.findViewById(R.id.id_page_vp);
-
-
 
         mShowUserHomeFragment=new ShowUserHomeFragment(this);
         mShowUserStatusFragment=new StatusListFragment(this);

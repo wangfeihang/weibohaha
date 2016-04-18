@@ -4,10 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/4/1.
  */
-public  class MyBaseAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public abstract class MyBaseAdapter <T> extends RecyclerView.Adapter<MyViewHolder> {
     public OnItemClickListener mOnClickListener;
     public OnItemLongClickListener mOnLongClickListener;
 
@@ -34,4 +36,6 @@ public  class MyBaseAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return 0;
     }
+
+    public abstract void  addData(List<T> datalist);
 }

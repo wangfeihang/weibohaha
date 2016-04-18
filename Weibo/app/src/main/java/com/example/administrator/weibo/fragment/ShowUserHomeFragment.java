@@ -35,23 +35,27 @@ public class ShowUserHomeFragment extends BaseFragment  implements StatusListCal
     private RecyclerView.LayoutManager mLayoutManager;
     private StatusListModel mStatusListModel;
     private SharedPreferencesUtils mSharedPreferencesUtils;
+
     @SuppressLint("ValidFragment")
     public ShowUserHomeFragment(Context context) {
         super();
         mContext=context;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View chatView = inflater.inflate(R.layout.fragment_show_user_home,container,false);
-        initViews(chatView);//初始化View，做一些findViewById的操作
-        getStatusList(mSharedPreferencesUtils.getToken().getToken(),5,"ShowUserHomeFragment");
-        return chatView;
+        View view = inflater.inflate(R.layout.fragment_show_user_home,container,false);
+        initViews(view);//初始化View，做一些findViewById的操作
+        getStatusList(mSharedPreferencesUtils.getToken().getToken(),5,"ShowUserHomeFragment",1);
+        return view;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
     }
+
     private void initViews(View view) {
         mStatusListModel=new StatusListModel();
         mSharedPreferencesUtils=new SharedPreferencesUtils(mContext);
@@ -78,21 +82,23 @@ public class ShowUserHomeFragment extends BaseFragment  implements StatusListCal
         });
         mRecyclerView.setAdapter(mAdapter);
     }
+
     public void onClickStatus(View v, List<Status> mStatusList,Context context)
     {
         int position=(int)v.getTag();
         Status status=mStatusList.get(position);
         StatusContentActivity.launch(context, status);
     }
-    private void getStatusList(String token,int count,String caller) {
-        mStatusListModel.getStatusList(token,count,caller);
+
+    private void getStatusList(String token,int count,String caller,int page) {
+        mStatusListModel.getStatusList(token,count,caller,page);
     }
 
     @Override
     public void onGetStatusListSuccess(StatusList statusList,String caller) {
         if(caller.equals("ShowUserHomeFragment")) {
-            mStatusList=new ArrayList<Status>();
-            mStatusList=statusList.getStatuses();
+
+            mStatusList.addAll(statusList.getStatuses());
             mAdapter.setData(mStatusList);
             mAdapter.notifyDataSetChanged();
             Log.d("test", "chang" + mStatusList.size());

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/3/30.
  */
-public class StatusListAdpater extends MyBaseAdapter {
+public class StatusListAdpater extends MyBaseAdapter<Status> {
 
     private List<Status> mStatusList;
     private Context mContext;
@@ -55,15 +55,20 @@ public class StatusListAdpater extends MyBaseAdapter {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         View v=holder.v;
-       initViews(v);
-       initData(mStatusList, position);
-       v.setTag(position);
+        initViews(v);
+        initData(mStatusList, position);
+        v.setTag(position);
     }
 
 
     @Override
     public int getItemCount() {
         return mStatusList.size();
+    }
+
+    @Override
+    public void addData(List<Status> datalist) {
+        mStatusList.addAll(datalist);
     }
 
 
@@ -84,12 +89,12 @@ public class StatusListAdpater extends MyBaseAdapter {
         tvSource.setText(Html.fromHtml(statusList.get(position).getSource(), null,null));
 
         tvText.setText(statusList.get(position).getText());
-//        tvRepostsCount.setText(String.format("%d",statusList.get(position).getRepostsCount()));
-//        tvCommentsCount.setText(String.format("%d", statusList.get(position).getCommentsCount()));
+        //        tvRepostsCount.setText(String.format("%d",statusList.get(position).getRepostsCount()));
+        //        tvCommentsCount.setText(String.format("%d", statusList.get(position).getCommentsCount()));
         tvAttitudesCount.setText(String.format("%d", statusList.get(position).getAttitudesCount()));
     }
     public void setData(List<Status> statusList) {
-        Log.d("statusList.size",String.format("%d",statusList.size()));
-        this.mStatusList=statusList;
+        Log.d("statusList.size", String.format("%d", statusList.size()));
+        mStatusList.addAll(statusList);
     }
 }

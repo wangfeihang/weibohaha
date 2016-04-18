@@ -55,23 +55,23 @@ public class StatusContentActivity extends BaseActivity implements CommentsListC
     }
     private void initViews() {
         mStatus = (Status)getIntent().getSerializableExtra(AppConstants.WeiboConfig.STATUS_BUNDLE_KEY);
+
+        mStatusContentModel=new StatusContentModel();
+
         llContent=(LinearLayout)findViewById(R.id.ll_content);
         imAvatar=(ImageView) findViewById(R.id.im_avatar);
         tvUserName=(TextView)findViewById(R.id.tv_username);
         tvSource=(TextView)findViewById(R.id.tv_source);
         tvText=(TextView)findViewById(R.id.status_content_text);
         tvCommentsCount=(TextView)findViewById(R.id.tv_comments_count);
+
         tvUserName.setText(mStatus.getUser().getScreenName());
         tvSource.setText(Html.fromHtml(mStatus.getSource(), null, null));
-    //    tvSource.setText(mStatus.getSource());
- //       String a=mStatus.getSource();
-                tvText.setText(mStatus.getText());
+        tvText.setText(mStatus.getText());
         tvCommentsCount.setText("评论"+mStatus.getCommentsCount());
-        mStatusContentModel=new StatusContentModel();
+
         mLayoutManager=new LinearLayoutManager(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_commentslist);
-        mViewHover = (MyHoveringScrollView) findViewById(R.id.view_hover);
-        mViewHover.setTopView(R.id.top);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new ItemDivider(this,
@@ -80,9 +80,6 @@ public class StatusContentActivity extends BaseActivity implements CommentsListC
             @Override
             public void onClick(View v) {
                 TextView info = (TextView) v.findViewById(R.id.tv_username);
-                User user=mCommentList.get((int)v.getTag()).getUser();
-                onClickUser(user, StatusContentActivity.this);
-
                 Toast.makeText(getApplicationContext(), "单击" + info.getText(), Toast.LENGTH_LONG).show();
             }
         },new MyBaseAdapter.OnItemLongClickListener() {
@@ -93,14 +90,19 @@ public class StatusContentActivity extends BaseActivity implements CommentsListC
 
             }
         });
+        mRecyclerView.setAdapter(mAdapter);
+
         llContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickUser(mStatus.getUser(),StatusContentActivity.this);
+                onClickUser(mStatus.getUser(), StatusContentActivity.this);
             }
         });
-        mRecyclerView.setAdapter(mAdapter);
+
+        mViewHover = (MyHoveringScrollView) findViewById(R.id.view_hover);
+        mViewHover.setTopView(R.id.top);
     }
+
     public static void launch(Context context,Status status) {
         Intent intent = new Intent();
         intent.setClass(context, StatusContentActivity.class);
@@ -110,9 +112,11 @@ public class StatusContentActivity extends BaseActivity implements CommentsListC
         Log.d("test",status.getText());
         context.startActivity(intent);
     }
+
     public void onClickUser(User user,Context context) {
         ShowUserActivity.launch(context, user);
     }
+
     @Override
     public void onGetCommentsListSuccess(CommentsList commentsList) {
         mCommentList=new ArrayList<Comment>();
