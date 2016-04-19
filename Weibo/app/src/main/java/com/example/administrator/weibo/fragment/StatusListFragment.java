@@ -15,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.administrator.weibo.R;
+import com.example.administrator.weibo.View.PullRefreshRecyclerView;
+import com.example.administrator.weibo.View.RefreshLayout;
 import com.example.administrator.weibo.activity.StatusContentActivity;
 import com.example.administrator.weibo.adapter.ItemDivider;
 import com.example.administrator.weibo.adapter.MyBaseAdapter;
@@ -73,7 +75,45 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
         mSharedPreferencesUtils=new SharedPreferencesUtils(mContext);
         mLayoutManager=new LinearLayoutManager(mContext);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_statuslist);
+
+
+        final PullRefreshRecyclerView pullRefreshRecyclerView = (PullRefreshRecyclerView)view.findViewById(R.id.recycler);
+        mRecyclerView = (RecyclerView)pullRefreshRecyclerView.getRefreshView();
+       // recyclerView.setAdapter(adapter);
+
+//        setContentView(pullRefreshRecyclerView);
+        pullRefreshRecyclerView.setOnRefreshListener(new RefreshLayout.OnRefreshListener() {
+            @Override
+            public void onPullDown(float y) {
+
+            }
+
+            @Override
+            public void onRefresh() {
+                pullRefreshRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pullRefreshRecyclerView.refreshOver(null);
+                    }
+                }, 2000);
+            }
+
+            @Override
+            public void onRefreshOver(Object obj) {
+
+            }
+
+
+        });
+
+
+
+
+
+
+
+
+      //  mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_statuslist);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new ItemDivider(mContext,
@@ -103,17 +143,16 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
             }
         });
 
-
+/*
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
-        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorOrange);
         mSwipeRefreshLayout.setDistanceToTriggerSync(400);// 设置手指在屏幕下拉多少距离会触发下拉刷新
         mSwipeRefreshLayout.setProgressBackgroundColor(R.color.white); // 设定下拉圆圈的背景
         mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE); // 设置圆圈的大小
 
-
+*/
     }
     public void onClickStatus(View v, List<Status> mStatusList,Context context)
     {
