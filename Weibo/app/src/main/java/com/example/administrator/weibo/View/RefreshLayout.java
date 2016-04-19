@@ -1,7 +1,6 @@
 package com.example.administrator.weibo.View;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -12,6 +11,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ScrollView;
+
+import com.example.administrator.weibo.R;
 
 /**
  * Created by Administrator on 2016/4/18.
@@ -51,6 +52,9 @@ public abstract class RefreshLayout extends ViewGroup {
     private int mNeedRefreshDeltaY = 120;
 
 
+    /**
+     * 为外部的View提供处理刷新的操作
+     */
     OnRefreshListener mRefreshListener;
 
     public interface OnRefreshListener {
@@ -88,7 +92,7 @@ public abstract class RefreshLayout extends ViewGroup {
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         mMediumAnimationDuration = getResources().getInteger(android.R.integer.config_mediumAnimTime);
         mRefreshHeaderView = (View)createHeaderView();
-        mRefreshHeaderView.setBackgroundColor(Color.parseColor("#FF0000"));
+        mRefreshHeaderView.setBackgroundColor(getResources().getColor(R.color.lightgray));
         addView(mRefreshHeaderView);
         mRefreshView = createRefreshView();
         addView(mRefreshView);
@@ -108,7 +112,9 @@ public abstract class RefreshLayout extends ViewGroup {
     protected abstract View createRefreshView();
 
 
-
+    /**
+     * 初始化View中的mHeaderView和mRefreshView
+     */
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -124,7 +130,9 @@ public abstract class RefreshLayout extends ViewGroup {
 
     }
 
-
+    /**
+     * 初始化View中的mHeaderView和mRefreshView的位置和大小
+     */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         Log.d("onLayout", "onLayout");
@@ -148,9 +156,10 @@ public abstract class RefreshLayout extends ViewGroup {
     }
 
 
+    /**
+     * 下拉完成后回到相应位置的动画
+     */
     Animation mAnimateToPosition = new Animation() {
-
-
         @Override
         protected void applyTransformation(float interpolatedTime, Transformation t) {
             Log.d("Animation", "in=> Animation");
@@ -167,35 +176,16 @@ public abstract class RefreshLayout extends ViewGroup {
         }
     };
 
-    public void setToRefreshing(){
-        if(NORMAL_STATUS != mCurStatus) {
-            return;
-        }
-        updateStatus(PULL_TO_REFRESH_STATUS);
-        mAnimateToPosition.reset();
-        mAnimateToPosition.setDuration(mMediumAnimationDuration);
-        mToPosition = 0;
-        mOriginalOffsetTop = getCurTop();
-        startAnimation(mAnimateToPosition);
-        mAnimateToPosition.setAnimationListener(new SimpleAnimationListener(){
-            @Override
-            public void onAnimationEnd(Animation animation){
 
-                updateStatus(REFRESHING_STATUS);
-                if(null != mRefreshListener){
-                    mRefreshListener.onRefresh();
-                }
-            }
-        });
-    }
-
-
+    /**
+     * 显示加载中完成之后的动画，即加载完成head移回屏幕上方
+     */
     public void refreshOver(final Object obj){
         if(REFRESHING_STATUS != mCurStatus){
             return;
         }
         updateStatus(RELEASE_TO_NORMAL);
-        mAnimateToPosition.reset();
+        mAnimateToPosition.reset();//最后head不见的动画，位移的动画
         mAnimateToPosition.setDuration(mMediumAnimationDuration);
         mToPosition = -mHeaderViewHeight;
         mOriginalOffsetTop = getCurTop();
@@ -212,7 +202,9 @@ public abstract class RefreshLayout extends ViewGroup {
         });
     }
 
-
+    /**
+     * 拦截手势消息
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev){
         Log.d("event ", "onInterceptTouchEvent触发");
@@ -254,9 +246,11 @@ public abstract class RefreshLayout extends ViewGroup {
             Log.d("event ", "onInterceptTouchEvent返回false");
             return super.onInterceptTouchEvent(ev);
         }
-    };
+    }
 
-
+    /**
+     * 未被拦截手势消息
+     */
     @Override
     public boolean onTouchEvent(MotionEvent ev){
         Log.d("event ", "onTouchEvent触发");
@@ -351,9 +345,12 @@ public abstract class RefreshLayout extends ViewGroup {
         invalidate();
     }
 
-
+    /**
+     * 下拉松开后执行的函数
+     */
     private void handleRelease(){
         int toPostion;
+        //判断是否下拉到相应位置，来进行动画位置的判断
         if(RELEASE_TO_REFRESH_STATUS == mCurStatus){
             toPostion = 0;
         }else if(PULL_TO_REFRESH_STATUS == mCurStatus){
@@ -362,18 +359,18 @@ public abstract class RefreshLayout extends ViewGroup {
         }else {
             return;
         }
-        mAnimateToPosition.reset();
+        mAnimateToPosition.reset();//从下到上的动画
         mAnimateToPosition.setDuration(mMediumAnimationDuration);
         mToPosition = toPostion;
         mOriginalOffsetTop = getCurTop();
-        mAnimateToPosition.setAnimationListener(new SimpleAnimationListener(){
+        mAnimateToPosition.setAnimationListener(new SimpleAnimationListener() {
             @Override
             public void onAnimationEnd(Animation animation) {
-                if(RELEASE_TO_NORMAL == mCurStatus){
+                if (RELEASE_TO_NORMAL == mCurStatus) {
                     updateStatus(NORMAL_STATUS);
-                }else if(RELEASE_TO_REFRESH_STATUS == mCurStatus){
+                } else if (RELEASE_TO_REFRESH_STATUS == mCurStatus) {
                     updateStatus(REFRESHING_STATUS);
-                    if(null != mRefreshListener){
+                    if (null != mRefreshListener) {
                         mRefreshListener.onRefresh();
                     }
                 }
