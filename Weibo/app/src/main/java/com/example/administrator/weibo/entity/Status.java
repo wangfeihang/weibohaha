@@ -3,6 +3,7 @@ package com.example.administrator.weibo.entity;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/30.
@@ -13,8 +14,25 @@ public class Status implements Serializable {
     private String source;
     private User user;
     private Long id;
-
-
+    @SerializedName("created_at")
+    private String createTime;//微博创建时间
+    private Long mid;//微博MID
+    private String idstr;//字符串型的微博ID
+    private boolean favorited;//是否已收藏，true：是，false：否
+    private boolean truncated;//是否被截断，true：是，false：否
+    @SerializedName("in_reply_to_status_id")
+    private String replytoStatusID;//（暂未支持）回复ID
+    @SerializedName("in_reply_to_user_id")
+    private String replytoUserID;//（暂未支持）回复人UID
+    @SerializedName("in_reply_to_screen_name")
+    private String replytoScreenName;//（暂未支持）回复人昵称
+    @SerializedName("thumbnail_pic")
+    private String thumbnailPic;//缩略图片地址，没有时不返回此字段
+    @SerializedName("bmiddle_pic")
+    private String bmiddlePic;//中等尺寸图片地址，没有时不返回此字段
+    @SerializedName("original_pic")
+    private String originalPic;//原始图片地址，没有时不返回此字段 @SerializedName("pic_ids")
+    private List<String> picIDs;//微博配图ID。多图时返回多图ID，用来拼接图片url。用返回字段thumbnail_pic的地址配上该返回字段的图片ID，即可得到多个图片url。
 
     @SerializedName("reposts_count")
     private int repostsCount;
@@ -78,7 +96,112 @@ public class Status implements Serializable {
     public void setAttitudesCount(int attitudesCount) {
         this.attitudesCount = attitudesCount;
     }
-/*
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public Long getMid() {
+        return mid;
+    }
+
+    public String getIdstr() {
+        return idstr;
+    }
+
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public boolean isTruncated() {
+        return truncated;
+    }
+
+    public String getReplytoStatusID() {
+        return replytoStatusID;
+    }
+
+    public String getReplytoUserID() {
+        return replytoUserID;
+    }
+
+    public String getReplytoScreenName() {
+        return replytoScreenName;
+    }
+
+    public String getThumbnailPic() {
+        return thumbnailPic;
+    }
+
+    public String getBmiddlePic() {
+        return bmiddlePic;
+    }
+
+    public String getOriginalPic() {
+        return originalPic;
+    }
+
+
+
+    public List<String> getPicIDs() {
+        return picIDs;
+    }
+
+
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setMid(Long mid) {
+        this.mid = mid;
+    }
+
+    public void setIdstr(String idstr) {
+        this.idstr = idstr;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
+
+    public void setTruncated(boolean truncated) {
+        this.truncated = truncated;
+    }
+
+    public void setReplytoStatusID(String replytoStatusID) {
+        this.replytoStatusID = replytoStatusID;
+    }
+
+    public void setReplytoUserID(String replytoUserID) {
+        this.replytoUserID = replytoUserID;
+    }
+
+    public void setReplytoScreenName(String replytoScreenName) {
+        this.replytoScreenName = replytoScreenName;
+    }
+
+    public void setThumbnailPic(String thumbnailPic) {
+        this.thumbnailPic = thumbnailPic;
+    }
+
+    public void setBmiddlePic(String bmiddlePic) {
+        this.bmiddlePic = bmiddlePic;
+    }
+
+    public void setOriginalPic(String originalPic) {
+        this.originalPic = originalPic;
+    }
+    public void setPicIDs(List<String> picIDs) {
+        this.picIDs=picIDs;
+    }
+
+
+    /*
     @Override
     public int describeContents() {
         return 0;

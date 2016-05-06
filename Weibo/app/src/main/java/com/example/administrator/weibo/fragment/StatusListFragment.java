@@ -1,10 +1,9 @@
 package com.example.administrator.weibo.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +24,7 @@ import com.example.administrator.weibo.common.AppConstants;
 import com.example.administrator.weibo.entity.Status;
 import com.example.administrator.weibo.entity.StatusList;
 import com.example.administrator.weibo.listener.ListInfiniteScrollListener;
+import com.example.administrator.weibo.model.ImageModel;
 import com.example.administrator.weibo.model.StatusListModel;
 import com.example.administrator.weibo.model.callback.StatusListCallback.GetStatusListCallback;
 import com.example.administrator.weibo.utils.SharedPreferencesUtils;
@@ -36,7 +36,8 @@ import java.util.List;
  * Created by Administrator on 2016/4/5.
  */
 
-public class StatusListFragment extends BaseFragment  implements GetStatusListCallback ,SwipeRefreshLayout.OnRefreshListener {
+@SuppressLint("ValidFragment")
+public class StatusListFragment extends BaseFragment  implements GetStatusListCallback {
     private Context mContext;
     private List<Status> mStatusList=new ArrayList<Status>();
     private ProgressBar progressBar;
@@ -44,8 +45,8 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private StatusListModel mStatusListModel;
+    private ImageModel mImageModel;
     private SharedPreferencesUtils mSharedPreferencesUtils;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private int page=0;
     public StatusListFragment(Context context) {
         super();
@@ -72,10 +73,10 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
 
     private void initViews(View view) {
         mStatusListModel=new StatusListModel();
+        mImageModel=new ImageModel();
         mSharedPreferencesUtils=new SharedPreferencesUtils(mContext);
         mLayoutManager=new LinearLayoutManager(mContext);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-
 
         final PullRefreshRecyclerView pullRefreshRecyclerView = (PullRefreshRecyclerView)view.findViewById(R.id.recycler);
         mRecyclerView = (RecyclerView)pullRefreshRecyclerView.getRefreshView();
@@ -106,14 +107,6 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
 
         });
 
-
-
-
-
-
-
-
-      //  mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_statuslist);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new ItemDivider(mContext,
@@ -143,19 +136,8 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
             }
         });
 
-/*
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-        // 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorOrange);
-        mSwipeRefreshLayout.setDistanceToTriggerSync(400);// 设置手指在屏幕下拉多少距离会触发下拉刷新
-        mSwipeRefreshLayout.setProgressBackgroundColor(R.color.white); // 设定下拉圆圈的背景
-        mSwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE); // 设置圆圈的大小
-
-*/
     }
-    public void onClickStatus(View v, List<Status> mStatusList,Context context)
-    {
+    public void onClickStatus(View v, List<Status> mStatusList,Context context) {
         int position=(int)v.getTag();
         Status status=mStatusList.get(position);
         StatusContentActivity.launch(context, status);
@@ -212,15 +194,6 @@ public class StatusListFragment extends BaseFragment  implements GetStatusListCa
         }.execute();
     }
 
-    @Override
-    public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // 停止刷新
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 5000); // 5秒后发送消息，停止刷新
 
-    }
+
 }

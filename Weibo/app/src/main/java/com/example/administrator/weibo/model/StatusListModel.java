@@ -1,7 +1,5 @@
 package com.example.administrator.weibo.model;
 
-import android.util.Log;
-
 import com.example.administrator.weibo.common.AppConstants;
 import com.example.administrator.weibo.entity.StatusList;
 import com.example.administrator.weibo.http.HttpCallback;
@@ -24,7 +22,6 @@ public class StatusListModel {
         mHttpClient.request(false,request, new HttpCallback<StatusList>(StatusList.class) {
             @Override
             public void onResponseSuccess(StatusList result) {
-                Log.d("test1", String.format("%d",result.getStatuses().size()));
                 NotificationCenter.INSTANCE.getObserver(StatusListCallback.GetStatusListCallback.class).onGetStatusListSuccess(result,caller);
             }
             @Override

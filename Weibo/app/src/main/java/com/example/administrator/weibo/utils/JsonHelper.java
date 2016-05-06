@@ -21,6 +21,7 @@ public class JsonHelper {
         return sGson;
     }
     public static <T>T toObject(String jsonString,Class<T> mclass) {
+        String s=jsonString;
         Gson gson=new Gson();
         return gson.fromJson(jsonString, mclass);
     }

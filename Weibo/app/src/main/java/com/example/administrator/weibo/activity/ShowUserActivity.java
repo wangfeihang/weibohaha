@@ -25,8 +25,8 @@ import java.util.List;
  * Created by Administrator on 2016/4/7.
  */
 public class ShowUserActivity extends FragmentActivity {
-    private List<Fragment> mFragmentList = new ArrayList<Fragment>();
-    private List<String> mFragmentTitles = new ArrayList<String>();
+    private List<Fragment> mFragmentList = new ArrayList<>();
+    private List<String> mFragmentTitles = new ArrayList<>();
     private FragmentAdapter mFragmentAdapter;
     private WrapContentHeightViewPager mPageVp;
 

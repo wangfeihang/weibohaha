@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yy.androidlib.util.notification.NotificationCenter;
+
 import java.util.List;
 
 /**
@@ -19,6 +21,13 @@ public abstract class MyBaseAdapter <T> extends RecyclerView.Adapter<MyViewHolde
     public interface OnItemLongClickListener {
         void onLongClick(View v);
     }
+
+
+    public MyBaseAdapter() {
+        NotificationCenter.INSTANCE.addObserver(this);
+    }
+
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
